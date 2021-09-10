@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .log-head {
+            position: absolute;
+            top: 20%;
+            left: 40%;
+        }
+
+        .log-form {
+            position: absolute;
+            border-radius: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+        }
+
+        p {
+            font-size: 1.1em;
+        }
+        
+        input {
+            font-size: 1.1em;
+        }
+
+        input[type=submit] {
+            padding: 0.4em;
+            cursor: pointer;
+        }
+
+        .ask-sign {
+            position: absolute;
+            top: 63%;
+            left: 37%;
+        }
+
+        .msg {
+            position: absolute;
+            font-size: 1.1em;
+            top: 75%;
+            left: 40%;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+    <h2 class="log-head">Login</h2>    
+    <form class="log-form" action="." method="POST">
+        {% csrf_token %}
+        <table>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><p>Username</p></td>
+            <td><input type="text" name="username" required></td>
+        </tr>
+
+        <tr>
+            <td><p>Password</p></td>
+            <td><input type="password" name="password" required></td>
+        </tr>
+        </table>
+        <input type="submit" value="Login">
+    </form>
+    <div class="msg">
+        {% for message in messages %}
+
+        {{message}}
+
+        {% endfor %}
+    </div>
+    <p class="ask-sign">Don't have an account? Create one <a href="{% url 'signup' %}">SignUp</a>
+    </p>
+</body>
+</html>

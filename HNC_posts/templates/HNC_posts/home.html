@@ -1,0 +1,38 @@
+{% extends 'HNC_app/main.html' %}
+
+{% block content %}
+
+<br>
+<div class="container">
+    {% if user.is_authenticated %}
+        <h3 style="text-transform: capitalize;"> <strong> Welcome </strong>, <em> {{user.username}} </em> </h3>
+    {% else %}
+        <h3> <strong> Welcome </strong>, <em> Guest </em></h3>
+    {% endif %}
+</div>
+<hr>
+<div class="container">
+    <table class="table table-borderless">
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{forloop.counter}}).</td>
+                <td>
+                    <a href="{{post.url}}" target="_blank" style="text-transform: capitalize;">{{post.title}}</a>
+                    <p>{{post.number_of_votes}} votes | by {{post.author.username}} | {{post.created_at|timesince}} ago | 
+                        {% if post.author != request.user %}
+                            <a href="{% url 'vote' post.id %}" class="btn btn-success">Upvote</a>
+                        {% else %}
+                            <a href="{% url 'vote' post.id %}" class="disabled btn btn-danger">Upvote</a>
+                        {% endif %}
+                        <a href="{% url 'post' post.id %}" class="btn btn-primary">View</a>
+                    </p>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #FFFF;
+        }
+
+        h1 {
+            position: absolute;
+            text-align: center;
+            top: 33%;
+            left: 38%;
+        }
+
+        form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        table {
+            font-size: 1.1em;
+            margin-bottom: 0.5em;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        input {
+            font-size: 1.1em;
+        }
+
+        input[type=submit] {
+            border: 1px solid #FFF;
+            position: absolute;
+            border-radius: 8px;
+            background: lightblue;
+            cursor: pointer;
+            padding: 10px;
+            left: 35%;
+            transition: all 0.3s ease;
+        }
+
+        input[type=submit]:hover {
+            box-shadow: 0 5px 10px 0 #000;
+        }
+
+    </style>
+    <title>New Post</title>
+</head>
+<body>
+    <h1>New Post</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <td>{{form.title.label}}</td>
+                <td>{{form.title}}</td>
+            </tr>
+
+            <tr>
+                <td>{{form.url.label}}</td>
+                <td>{{form.url}}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

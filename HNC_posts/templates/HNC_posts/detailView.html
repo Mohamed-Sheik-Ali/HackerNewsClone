@@ -1,0 +1,46 @@
+{% extends 'HNC_app/main.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <h2 style="text-transform: capitalize;"><u>{{post.title}}</u></h2>
+    <p>{{post.number_of_votes}} votes</p>
+    <h6>By: <em>{{post.author.username}}</em> {{post.created_at|timesince}} ago</h6>
+    <h6>URL: <a href="{{post.url}}" target="_blank">{{post.url}}</a></h6>
+    <hr>
+    {% if post.author != request.user %}
+        <a href="{% url 'vote' post.id %}?next_page=post" class="btn btn-success">Upvote</a>
+    {% else %}
+        <a href="{% url 'vote' post.id %}" class="disabled">Upvote</a>
+    {% endif %}
+    <hr>
+    <div class="container">
+        <h2>Comments</h2>
+        {% for comment in post.comments.all %}
+            <p><strong>{{comment.author.username}}</strong> | <small>{{comment.created_at|timesince}} ago</small></p>
+            {{comment.body}}
+        {% empty %}
+            <p>No Comments</p>
+        {% endfor %}
+    </div>
+    <hr>
+    <div class="container">
+        <h2>Add Comment</h2>
+        {% if request.user.is_authenticated %}
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{form.as_p}}
+
+                <div class="contai">
+                    <button class="btn btn-danger">Submit</button>
+                </div>
+            </form>
+        {% else %}
+            <p>Please, login to comment on posts.</p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
