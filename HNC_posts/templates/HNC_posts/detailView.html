@@ -11,7 +11,7 @@
     {% if post.author != request.user %}
         <a href="{% url 'vote' post.id %}?next_page=post" class="btn btn-success">Upvote</a>
     {% else %}
-        <a href="{% url 'vote' post.id %}" class="disabled">Upvote</a>
+        <a href="{% url 'vote' post.id %}" class="disabled btn btn-danger">Upvote</a>
     {% endif %}
     <hr>
     <div class="container">
